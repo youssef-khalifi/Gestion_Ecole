@@ -1,9 +1,32 @@
 package entities;
 
+import jakarta.persistence.*;
+
+import java.util.Collection;
+import java.util.Set;
+
+@Entity
 public class Filiere {
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @Column(name = "ID", nullable = false)
+    private int id;
+    @Basic
+    @Column(name = "CODE", nullable = false, length = 255)
     private String code;
+    @Basic
+    @Column(name = "LIBELLE", nullable = false, length = 255)
     private String libelle;
+    @OneToMany(mappedBy = "filiere")
+    private Set<Etudiant> etudiants;
+
+    public Set<Etudiant> getEtudiants() {
+        return etudiants;
+    }
+
+    public void setEtudiants(Set<Etudiant> etudiants) {
+        this.etudiants = etudiants;
+    }
 
     public Filiere(String code, String libelle) {
         this.code = code;

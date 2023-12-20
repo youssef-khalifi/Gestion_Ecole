@@ -1,10 +1,24 @@
 package entities;
 
+import jakarta.persistence.*;
+
+@Entity
 public class Etudiant {
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @Column(name = "ID", nullable = false)
+    private int id;
+    @Basic
+    @Column(name = "NOM", nullable = false, length = 255)
     private String nom;
+    @Basic
+    @Column(name = "PRENOM", nullable = false, length = 255)
     private String prenom;
+    @Basic
+    @Column(name = "CNE", nullable = false, length = 255)
     private String cne;
+    @ManyToOne
+    @JoinColumn(name = "FILIERE", referencedColumnName = "ID")
     private Filiere filiere;
 
     public Etudiant() {
